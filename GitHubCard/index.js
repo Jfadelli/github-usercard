@@ -5,11 +5,11 @@
 */
 
 const followersArray = [
-  'https://cors-anywhere.herokuapp.com/https://api.github.com/slroberts',
-  'https://cors-anywhere.herokuapp.com/https://api.github.com/PauloFurtunatoAlexandre',
-  'https://cors-anywhere.herokuapp.com/https://api.github.com/dangnlu18',
-  'https://cors-anywhere.herokuapp.com/https://api.github.com/codyt11',
-  'https://cors-anywhere.herokuapp.com/https://api.github.com/karenwinnielei'
+  'https://cors-anywhere.herokuapp.com/https://api.github.com/users/slroberts',
+  'https://cors-anywhere.herokuapp.com/https://api.github.com/users/PauloFurtunatoAlexandre',
+  'https://cors-anywhere.herokuapp.com/https://api.github.com/users/dangnlu18',
+  'https://cors-anywhere.herokuapp.com/https://api.github.com/users/codyt11',
+  'https://cors-anywhere.herokuapp.com/https://api.github.com/users/karenwinnielei'
 ];
 
 axios.get('https://api.github.com/users/jfadelli')
