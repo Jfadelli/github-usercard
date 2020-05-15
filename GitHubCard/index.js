@@ -4,12 +4,38 @@
     https://api.github.com/users/<your name>
 */
 
+const followersArray = [
+  'https://cors-anywhere.herokuapp.com/https://api.github.com/slroberts',
+  'https://cors-anywhere.herokuapp.com/https://api.github.com/PauloFurtunatoAlexandre',
+  'https://cors-anywhere.herokuapp.com/https://api.github.com/dangnlu18',
+  'https://cors-anywhere.herokuapp.com/https://api.github.com/codyt11',
+  'https://cors-anywhere.herokuapp.com/https://api.github.com/karenwinnielei'
+];
+
+axios.get('https://api.github.com/users/jfadelli')
+  .then(response => {
+    const dataItem = response.data
+    // console.log(dataItem)
+    // console.log(dataItem['avatar_url'])
+    const cardData = document.querySelector('.cards')
+    cardData.appendChild(newCardMaker(dataItem))
+  })
+  .then(response => {
+    followersArray.forEach(item => {
+      axios.get(item)
+        .then(response => {
+          const dataItem = response.data
+          const cardData = document.querySelector('.cards')
+          cardData.appendChild(newCardMaker(dataItem))
+        })
+    })
+  })
+
+
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
     data in order to use it to build your component function
-
-
     res.data*&***()(*^(*^(*^(*^(*&^)))))
 
     Skip to STEP 3.
@@ -31,7 +57,17 @@
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+
+
+
+// followersArray.forEach(item => {
+//   axios.get(item)
+//     .then(response => {
+//       const dataItem = response.data
+//       const cardData = document.querySelector('.cards')
+//       cardData.appendChild(newCardMaker(dataItem))
+//     })
+// })
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -52,6 +88,53 @@ const followersArray = [];
       </div>
     </div>
 */
+const newCardMaker = (dataItem) => {
+  const card = document.createElement('div')
+  const img = document.createElement('img')
+  const cardInfo = document.createElement('div')
+  const firstName = document.createElement('h3')
+  const userName = document.createElement('p')
+  const userLocation = document.createElement('p')
+  const profile = document.createElement('p')
+  const profileLink = document.createElement('a')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+
+  card.appendChild(img)
+  card.appendChild(cardInfo)
+  cardInfo.append(firstName, userName, userLocation)
+  cardInfo.appendChild(profile)
+  profile.appendChild(profileLink)
+  cardInfo.append(followers, following, bio)
+
+  card.classList.add('card')
+  firstName.classList.add('name')
+  userName.classList.add('username')
+  userLocation.classList.add('p')
+  profile.classList.add('p')
+  profileLink.classList.add('a')
+  followers.classList.add('p')
+  following.classList.add('p')
+  bio.classList.add('p')
+
+  img.src = dataItem.avatar_url;
+  firstName.textContent = dataItem.name;
+  userName.textContent = dataItem.userName;
+  userLocation.textContent = dataItem.location;
+  // profile.textContent = 'Profile: ' + dataItem.html_url
+  //to make line 97 work with the string 'Profile: ', breaks the ability for me to include the profileLink href...
+  profileLink.textContent = dataItem.html_url;
+  profileLink.href = dataItem.html_url
+  followers.textContent = dataItem.followers;
+  following.textContent = dataItem.following;
+  bio.textContent = dataItem.bio;
+
+  return card
+}
+// console.log(newCardMaker)
+// const cards = document.querySelector('.cards')
+// cards.appendChild(newCardMaker(dataItem))
 
 /*
   List of LS Instructors Github username's:
